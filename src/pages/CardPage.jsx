@@ -3,12 +3,13 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VisaCard from '../components/VisaCard';
+import BottomNav from '../components/BottomNav';
 import { ArrowLeft, CreditCard, Settings, Wifi, Lock } from 'lucide-react';
 import { API_BASE_URL } from '../config/api';
 
 const API_URL = `${API_BASE_URL}/api/client/card`;
 
-export default function CardPage({ token, onBack }) {
+export default function CardPage({ token, onBack, onNavigate }) {
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -130,6 +131,8 @@ export default function CardPage({ token, onBack }) {
           <Button variant="secondary" fullWidth onClick={onBack}>Fermer</Button>
         </main>
       )}
+
+      <BottomNav activePage="card" onNavigate={onNavigate} />
     </div>
   );
 }

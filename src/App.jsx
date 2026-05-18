@@ -44,19 +44,19 @@ export default function App() {
   }
 
   if (currentPage === 'account') {
-    return <AccountPage token={token} onBack={() => handleNavigate('dashboard')} />;
+    return <AccountPage token={token} onBack={() => handleNavigate('dashboard')} onNavigate={handleNavigate} />;
   }
 
   if (currentPage === 'card') {
-    return <CardPage token={token} onBack={() => handleNavigate('dashboard')} />;
+    return <CardPage token={token} onBack={() => handleNavigate('dashboard')} onNavigate={handleNavigate} />;
   }
 
   if (currentPage === 'security') {
-    return <SecurityPage token={token} onBack={() => handleNavigate('dashboard')} />;
+    return <SecurityPage token={token} onBack={() => handleNavigate('dashboard')} onNavigate={handleNavigate} />;
   }
 
   if (currentPage === 'transfer') {
-    return <TransferPage token={token} onBack={() => handleNavigate('dashboard')} />;
+    return <TransferPage token={token} onBack={() => handleNavigate('dashboard')} onNavigate={handleNavigate} />;
   }
 
   return null;

@@ -3,12 +3,13 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import LoadingSpinner from '../components/LoadingSpinner';
+import BottomNav from '../components/BottomNav';
 import { AlertTriangle, ArrowLeft, Clock, Send, Wallet } from 'lucide-react';
 import { API_BASE_URL } from '../config/api';
 
 const API_URL = `${API_BASE_URL}/api/client/transfer`;
 
-export default function TransferPage({ token, onBack }) {
+export default function TransferPage({ token, onBack, onNavigate }) {
   const [transfer, setTransfer] = useState(null);
   const [beneficiaryId, setBeneficiaryId] = useState('');
   const [amount, setAmount] = useState('');
@@ -177,6 +178,8 @@ export default function TransferPage({ token, onBack }) {
           </Card>
         </main>
       )}
+
+      <BottomNav activePage="transfer" onNavigate={onNavigate} />
     </div>
   );
 }

@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import LoadingSpinner from '../components/LoadingSpinner';
+import BottomNav from '../components/BottomNav';
 import { AlertTriangle, ArrowLeft, Shield, User } from 'lucide-react';
 import { API_BASE_URL } from '../config/api';
 
 const API_URL = `${API_BASE_URL}/api/client/account`;
 
-export default function AccountPage({ token, onBack }) {
+export default function AccountPage({ token, onBack, onNavigate }) {
   const [account, setAccount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -120,6 +121,8 @@ export default function AccountPage({ token, onBack }) {
           </div>
         </main>
       )}
+
+      <BottomNav activePage="dashboard" onNavigate={onNavigate} />
     </div>
   );
 }

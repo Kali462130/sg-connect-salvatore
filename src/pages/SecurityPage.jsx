@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import LoadingSpinner from '../components/LoadingSpinner';
+import BottomNav from '../components/BottomNav';
 import { ArrowLeft, Bell, ChevronRight, Fingerprint, LockKeyhole, Shield, Smartphone } from 'lucide-react';
 import { API_BASE_URL } from '../config/api';
 
@@ -14,7 +15,7 @@ const optionIcons = {
   autoLock: LockKeyhole,
 };
 
-export default function SecurityPage({ token, onBack }) {
+export default function SecurityPage({ token, onBack, onNavigate }) {
   const [security, setSecurity] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -132,6 +133,8 @@ export default function SecurityPage({ token, onBack }) {
           </Card>
         </main>
       )}
+
+      <BottomNav activePage="security" onNavigate={onNavigate} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VisaCard from '../components/VisaCard';
+import BottomNav from '../components/BottomNav';
 import { API_BASE_URL } from '../config/api';
 import {
   ArrowDownLeft,
@@ -13,7 +14,6 @@ import {
   Coffee,
   CreditCard,
   FileText,
-  Home,
   LogOut,
   QrCode,
   Receipt,
@@ -265,12 +265,7 @@ export default function DashboardPage({ token, onLogout, onNavigate }) {
         </div>
       </Modal>
 
-      <nav className="bottom-nav">
-        <button className="nav-icon active" aria-label="Accueil"><Home size={23} /></button>
-        <button onClick={() => onNavigate('transfer')} className="nav-icon" aria-label="Virement"><Send size={23} /></button>
-        <button onClick={() => onNavigate('card')} className="nav-icon" aria-label="Carte"><CreditCard size={23} /></button>
-        <button onClick={() => onNavigate('security')} className="nav-icon" aria-label="Sécurité"><Shield size={23} /></button>
-      </nav>
+      <BottomNav activePage="dashboard" onNavigate={onNavigate} />
     </div>
   );
 }
