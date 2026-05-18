@@ -192,28 +192,28 @@
   min-height: 0;
 }
 
-.visa-card-nuclamp(1.05rem, 5vw, 1.25rem);
+.visa-card-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: clamp(1.05rem, 5vw, 1.25rem);
   line-height: 1.35;
   letter-spacing: 0.14em;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-all4em;
-  color: #fff;
-  white-space: nowrap;
+  word-break: break-all;
 }
 
 .visa-card-number.compact {
   font-size: 1.125rem;
-}flex;
+}
+
+.visa-card-details {
+  display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 16px;
-  margin-top: 8: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  align-items: end;
-  gap: 20px;
+  margin-top: 8px;
 }
 
 .visa-card::before {
@@ -278,6 +278,10 @@
   .visa-card-number {
     font-size: 1.05rem;
     letter-spacing: 0.11em;
+  }
+
+  .visa-card-details {
+    gap: 12px;
     font-size: 0.85rem;
   }
 }
@@ -293,10 +297,6 @@
   .visa-card {
     min-height: 210px;
     max-height: 250px;
-  }
-
-  .visa-card-details {
-    gap: 12px;
   }
 }
 
