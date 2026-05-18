@@ -163,6 +163,7 @@
   aspect-ratio: 85.6 / 53.98;
   border-radius: 18px;
   color: #fff;
+  display: block;
   position: relative;
   overflow: hidden;
   padding: 22px 24px;
@@ -170,6 +171,35 @@
     radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 18%),
     linear-gradient(135deg, #d70716 0%, #7a171d 45%, #171923 100%);
   box-shadow: 0 24px 50px rgba(17, 24, 39, 0.22);
+}
+
+.visa-card-inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.visa-card-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  letter-spacing: 0.14em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.visa-card-number.compact {
+  font-size: 1.125rem;
+}
+
+.visa-card-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: end;
+  gap: 20px;
 }
 
 .visa-card::before {
@@ -221,6 +251,26 @@
   transform: translateX(20px);
 }
 
+@media (max-width: 380px) {
+  .page-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .visa-card {
+    padding: 18px 16px;
+  }
+
+  .visa-card-number {
+    font-size: 1.05rem;
+    letter-spacing: 0.11em;
+  }
+
+  .visa-card-details {
+    gap: 12px;
+  }
+}
+
 .donut {
   width: 168px;
   height: 168px;
@@ -265,4 +315,12 @@
 .toggle,
 .toggle::after {
   border-radius: 0 !important;
+}
+
+.visa-card {
+  border-radius: 18px !important;
+}
+
+.visa-chip {
+  border-radius: 8px !important;
 }
