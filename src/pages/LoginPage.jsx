@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import SGLogo from '../components/SGLogo';
+import { Eye, EyeOff, LockKeyhole } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
-const API_URL = 'http://localhost:5000/api/auth/login';
+const API_URL = `${API_BASE_URL}/api/auth/login`;
 
 export default function LoginPage({ initialIdentifier = '', onLoginSuccess }) {
   const [identifierClient, setIdentifierClient] = useState(initialIdentifier || '5418759624');
@@ -32,9 +35,7 @@ export default function LoginPage({ initialIdentifier = '', onLoginSuccess }) {
       } else {
         setStatus('success');
         setMessage(data.message || 'Connexion réussie.');
-        if (onLoginSuccess) {
-          onLoginSuccess(data.token, rememberId, identifierClient);
-        }
+        onLoginSuccess?.(data.token, rememberId, identifierClient);
       }
     } catch (error) {
       setStatus('error');
@@ -45,23 +46,19 @@ export default function LoginPage({ initialIdentifier = '', onLoginSuccess }) {
   };
 
   return (
-    <div className="page-shell">
-      <div className="login-card">
-        <div className="brand-row">
-          <div className="sg-logo">
-            <div className="sg-block sg-block-black" />
-            <div className="sg-block sg-block-red" />
-          </div>
-          <div>
-            <h1>Votre espace client</h1>
-            <p>Connectez-vous pour accéder à votre compte.</p>
-          </div>
+    <div className="mobile-frame flex items-center justify-center bg-white px-5">
+      <div className="w-full rounded-3xl bg-white p-7 shadow-2xl ring-1 ring-gray-100">
+        <div className="mb-7 text-center">
+          <SGLogo width={68} height={68} className="mx-auto mb-4" />
+          <h1 className="text-2xl font-extrabold text-gray-950">Votre espace client</h1>
+          <p className="mt-2 text-sm font-medium text-gray-500">Connectez-vous à votre compte</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <label>
-            Identifiant client
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label htmlFor="identifierClient" className="label">Identifiant client</label>
             <input
+              id="identifierClient"
               type="text"
               value={identifierClient}
               onChange={(e) => setIdentifierClient(e.target.value)}
@@ -69,59 +66,67 @@ export default function LoginPage({ initialIdentifier = '', onLoginSuccess }) {
               pattern="[0-9]*"
               placeholder="5418759624"
               required
+              className="input text-lg font-semibold"
             />
-          </label>
+          </div>
 
-          <label>
-            Code secret
-            <div className="password-field">
+          <div>
+            <label htmlFor="secretCode" className="label">Code secret</label>
+            <div className="relative">
               <input
+                id="secretCode"
                 type={showSecret ? 'text' : 'password'}
                 value={secretCode}
                 onChange={(e) => setSecretCode(e.target.value)}
                 placeholder="Entrez votre code secret"
                 required
+                className="input pr-12 text-lg font-semibold"
               />
               <button
                 type="button"
-                className="eye-button"
-                onClick={() => setShowSecret((current) => !current)}
-                aria-label={showSecret ? 'Masquer le code secret' : 'Afficher le code secret'}
+                onClick={() => setShowSecret(!showSecret)}
+                className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+                aria-label={showSecret ? 'Masquer' : 'Afficher'}
               >
-                {showSecret ? '🙈' : '👁️'}
+                {showSecret ? <EyeOff size={19} /> : <Eye size={19} />}
               </button>
             </div>
-          </label>
+          </div>
 
-          <div className="options-row">
-            <label className="remember-label">
+          <div className="flex items-center justify-between gap-4 text-sm">
+            <label className="flex cursor-pointer items-center gap-2 font-semibold text-gray-700">
               <input
                 type="checkbox"
                 checked={rememberId}
                 onChange={(e) => setRememberId(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 accent-primary-500"
               />
               Mémoriser mon ID
             </label>
-
-            <button type="button" className="link-button">
+            <button type="button" className="font-bold text-primary-600">
               Code oublié ?
             </button>
           </div>
 
-          <button type="submit" className="submit-button" disabled={loading}>
-            {loading ? 'Connexion...' : 'Se connecter'}
-          </button>
-
           {message && (
-            <p className={`message ${status === 'success' ? 'message-success' : 'message-error'}`}>
+            <div className={`rounded-2xl border p-3 text-sm font-semibold ${
+              status === 'success'
+                ? 'border-green-200 bg-green-50 text-green-700'
+                : 'border-red-200 bg-red-50 text-red-700'
+            }`}>
               {message}
-            </p>
+            </div>
           )}
+
+          <button type="submit" disabled={loading} className="btn-primary btn-lg w-full gap-2">
+            <LockKeyhole size={18} />
+            {loading ? 'Connexion en cours...' : 'Se connecter'}
+          </button>
         </form>
 
-        <div className="legal-note">
+        <div className="mt-7 border-t border-gray-100 pt-5 text-center text-xs font-medium leading-5 text-gray-500">
           <p>Connexion sécurisée SSL 256 bits</p>
-          <p>Société Générale - Tous droits réservés</p>
+          <p>© Société Générale - Tous droits réservés</p>
         </div>
       </div>
     </div>
